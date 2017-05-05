@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style>
+		.nexttext { font-weight: bold; color: #002A5C; }
+		</style>
+		<script>
+		conditionarr = window.location.href.split("c=")
+		c = conditionarr[1]
+		console.log(localStorage["condition"])
+		</script>
+	</head>
+	<body>	
+	<div style="text-align:center;margin-left:15%;margin-right:15%;margin-top:10%;font-family:helvetica;";>
+		<p style="font-size:28px;">
+			Introduction
+		</p>
+		<p style="font-size:18px;margin-top:-15px;">
+In this experiment, you're going to see some blocks. The goal is to figure out which blocks are <b>blickets</b> and how to recognize <b>blickets</b> on sight.
+<br><br>
+You will do this by seeing what happens when we put different objects on top of a <b>blicket detector</b>, where <b>blickets</b> always make the detector activate.
+<br><br>
+<i>Make sure your sound is turned on.
+<br>
+Please do not use a mobile device for this experiment.</i>
+<br><br>
+Click <span class=nexttext>NEXT</span> to continue	
+		</p>
+			<div class="next">
+				<button type="button" id="button" style="margin-top:5px" onclick="location.href='./video.html'+'?c='+c;">NEXT</button>
+			</div>
+		</p>
+	</div>
+	</body>
+</html>

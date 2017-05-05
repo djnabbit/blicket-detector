@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style>
+		.nexttext { font-weight: bold; color: #002A5C; }
+		</style>
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){
+			document.getElementById("radio0").onclick = nextEnable;
+			document.getElementById("radio1").onclick = nextEnable;
+			document.getElementById("button").onclick = nextButton;
+			blockNumber = 0
+			blocktionary = {}
+			conditionarr = window.location.href.split("c=");
+			c = conditionarr[1];
+			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
+			if(c == 0) {
+					var seenConsistentBlocks = ["rrbrr","rrbrr","rrbrb","rrbrb","rrbrb","rrbbr","rrbbr","rrbbb","rrbbb","rrbbb","brrrr","brrbb","brbrb","bbrbr","bbbrr"];
+					var seenInconsistentBlocks = ["rrrrb","rrrbr","rbrbb","rbbrr","rbbbr"]
+					blickets = ["rrbrr","rrbrb","rrbbr","rrbbb"]
+					nonBlickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"]
+				}; 
+			//Near condition, blue distractor	
+				if(c == 1) {
+					var seenConsistentBlocks = ["bbrbb","bbrbb","bbrbr","bbrbr","bbrbr","bbrrb","bbrrb","bbrrr","bbrrr","bbrrr","rbbbb","rbbrr","rbrbr","rrbrb","rrrbb"];
+					var seenInconsistentBlocks = ["bbbbr","bbbrb","brbrr","brrbb","brrrb"]
+					blickets = ["bbrbb","bbrbr","bbrrb","bbrrr"]
+					nonBlickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbbrr","bbbrb","bbbbr","bbbbb"]
+				};
+			//Distant condition, red distractor
+				if(c == 2) {
+					var seenConsistentBlocks = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr"];
+					var seenInconsistentBlocks = ["rbrbb","rbbrr","rbbbr","brrbb","brbrb"]
+					blickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb"]
+					nonBlickets = ["rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"]
+				}; 
+			//Distant condition, blue distractor
+				if(c == 3) {
+					var seenConsistentBlocks = ["bbbbb","bbbbr","bbbrb","bbbrr","bbrbb","bbrbr","bbrrb","bbrrr","rrbbb","rrbbr","rrbrb","rrbrr","rrrbb","rrrbr","rrrrb"];
+					var seenInconsistentBlocks = ["brbrr","brrbb","brrrb","rbbrr","rbrbr"]
+					blickets = ["bbbbb","bbbbr","bbbrb","bbbrr","bbrbb","bbrbr","bbrrb","bbrrr","rbbbb","rbbbr","rbbrb","rbbrr","rbrbb","rbrbr","rbrrb","rbrrr"]
+					nonBlickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb"]
+				};
+				function changeImg() {
+					if (r=1){
+						document.getElementById('block1').src = sourceB;
+						document.getElementById('block2').src = sourceNB;
+						blockNames = [currentB,currentNB]
+					}else{
+						document.getElementById('block2').src = sourceB;
+						document.getElementById('block1').src = sourceNB;
+						blockNames = [currentNB,currentB]
+					}
+				}
+				function nextButton() {
+					blockNumber += 1
+						var radios = document.getElementsByName('blicketness');
+						for (var i = 0, length = radios.length; i < length; i++) {
+						    if (radios[i].checked) {
+						        selection = blockNames[i];
+						        document.getElementById('radio'+i).checked = false;
+						        break;
+						    }
+						}
+						if (blickets.indexOf(selection) !== -1){ 
+							blocktionary[blockNumber] = selection+" (correct)";
+							localStorage["fc_"+blockNumber] = selection+" (correct)";
+						}else{
+							blocktionary[blockNumber] = selection+" (incorrect)";
+							localStorage["fc_"+blockNumber] = selection+" (incorrect)";
+						}
+						document.getElementById('button').disabled = true;
+						if (blockNumber > 3){
+							window.location.href = "./explanation.html?c="+c;
+						}
+					currentB = b[blockNumber];
+					currentNB = nb[blockNumber];
+					document.getElementById('block1').src = "img/white.png";
+					document.getElementById('block2').src = "img/white.png";
+					setTimeout(changeImg,100);
+					sourceB = "img/"+currentB+".png";
+					sourceNB = "img/"+currentNB+".png";
+				}
+				function nextEnable() {
+					document.getElementById('button').disabled = false;
+				}
+				function shuffle(array) {
+	  				var currentIndex = array.length, temporaryValue, randomIndex;
+	  				while (0 !== currentIndex) {
+	    				randomIndex = Math.floor(Math.random() * currentIndex);
+	    				currentIndex -= 1;
+					    temporaryValue = array[currentIndex];
+					    array[currentIndex] = array[randomIndex];
+					    array[randomIndex] = temporaryValue;
+	  					}
+					return array;
+				}
+				blickets = shuffle(blickets);
+				nonBlickets = shuffle(nonBlickets);
+				b = blickets.slice(0,4);
+				nb = nonBlickets.slice(0,4);
+				currentB = b[blockNumber];
+				currentNB = nb[blockNumber];
+				r = Math.floor(Math.random() * 2);
+				sourceB = "img/"+currentB+".png";
+				sourceNB = "img/"+currentNB+".png";
+				changeImg()
+		});
+
+		</script>
+	</head>
+	<body>	
+	<div style="text-align:center;margin-left:15%;margin-right:15%;margin-top:10%;font-family:helvetica;font-size:18px;">
+		<p>
+			Which block is more likely to activate the machine?
+		</p>
+		<img src="" id="block1"/>
+		<img src="" id="block2"/>
+			<div class="radio" id="select">
+				<form action="">
+  					<input type="radio" id="radio0" name="blicketness" value="block1">
+  					<span style="display:inline-block; width:77px;"></span>
+  					<input type="radio" id="radio1" name="blicketness" value="block2">
+					</form>
+			<div class="next">
+				<button type="button" id="button" style="margin-top:5px" onclick="" disabled="true">NEXT</button>
+			</div>
+		</p>
+	</div>
+	</body>
+</html>

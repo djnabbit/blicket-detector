@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style>
+		.nexttext { font-weight: bold; color: #002A5C; }
+		</style>
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){
+			document.getElementById("isBlicket0").onclick = nextEnable;
+			document.getElementById("isBlicket1").onclick = nextEnable;
+			document.getElementById("radio1").onclick = nextEnable;
+			document.getElementById("radio2").onclick = nextEnable;
+			document.getElementById("radio3").onclick = nextEnable;
+			document.getElementById("radio4").onclick = nextEnable;
+			document.getElementById("radio5").onclick = nextEnable;
+			document.getElementById("radio6").onclick = nextEnable;
+			document.getElementById("radio7").onclick = nextEnable;
+			document.getElementById("button").onclick = nextButton;
+			blockNumber = 0
+			blocktionary = {}
+			taskName = "blicketness"
+			$(document.getElementById("howConfident")).hide()
+			conditionarr = window.location.href.split("c=");
+			c = conditionarr[1];
+			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
+		//Near condition, red distractor
+			if(c == 0) {
+				var seenConsistentBlocks = ["rrrbb","rrbrr","rbrrb","rbrbr","rbbbr","bbrrr","bbrrb","bbrbb","bbbrr","bbbrb","bbbbr"];
+				var seenInconsistentBlocks = ["brrrr","brrbb","brbrb","brbbr","brbbb"];
+				var unseenConsistentBlocks = ["rrrrr","rrrrb","rrrbr","rrbrb","rrbbr","rrbbb","rbrrr","rbrbb","rbbrr","rbbrb","rbbbb","bbrbr","bbbbb"];
+				var unseenInconsistentBlocks = ["brrrb","brrbr","brbrr"];
+			}; 
+		//Near condition, blue distractor	
+			if(c == 1) {
+				var seenConsistentBlocks = ["bbbrr","bbrbb","brbbr","brbrb","brrrb","rrbbb","rrbbr","rrbrr","rrrbb","rrrbr","rrrrb"];
+				var seenInconsistentBlocks = ["rbbbb","rbbrr","rbrbr","rbrrb","rbrrr"];
+				var unseenConsistentBlocks = ["bbbbb","bbbbr","bbbrb","bbrbr","bbrrb","bbrrr","brbbb","brbrr","brrbb","brrbr","brrrr","rrbrb","rrrrr"];
+				var unseenInconsistentBlocks = ["rbbbr","rbbrb","rbrbb"];
+			};
+			//Distant condition, red distractor
+				if(c == 2) {
+					var seenConsistentBlocks = ["rrrrr","rrrrb","rrrbb","rrbrr","rrbbr","rrbbb","bbrrr","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr"];
+					var seenInconsistentBlocks = ["rbrbb","rbbrr","rbbbr","brrbb","brbrb"]
+					var unseenConsistentBlocks = ["rrrbr","rrbrb","bbrrb","bbbbb"];
+					var unseenInconsistentBlocks = ["rbrrr","rbrrb","rbrbr","rbbrb","rbbbb","brrrr","brrrb","brrbr","brbrr","brbbr","brbbb"];
+				}; 
+			//Distant condition, blue distractor
+				if(c == 3) {
+					var seenConsistentBlocks = ["bbbbb","bbbbr","bbbrr","bbrbb","bbrrb","bbrrr","rrbbb","rrbrb","rrbrr","rrrbb","rrrbr","rrrrb"];
+					var seenInconsistentBlocks = ["brbrr","brrbb","brrrb","rbbrr","rbrbr"]
+					var unseenConsistentBlocks = ["bbbrb","bbrbr","rrbbr","rrrrr"];
+					var unseenInconsistentBlocks = ["brbbb","brbbr","brbrb","brrbr","brrrr","rbbbb","rbbbr","rbbrb","rbrbb","rbrrb","rbrrr"];
+				};
+				function changeImg() {
+					return function(){
+						document.getElementById('block1').src = source;
+						document.getElementById('block2').src = source;
+					}
+				}
+				function nextButton() {
+					document.getElementById('button').disabled = true
+					if(taskName == "blicketness"){
+						taskName = "confidence"
+						var radios = document.getElementsByName('blicketnesstask');
+						for (var i = 0, length = radios.length; i < length; i++) {
+							if (radios[i].checked) {
+								selection = parseInt(radios[i].value);
+								document.getElementById('isBlicket'+i).checked = false;
+								break;
+							}
+						}
+						$(document.getElementById("howConfident")).show();
+						$(document.getElementById("isBlicket")).hide();
+						if(selection == 1){
+							document.getElementById("confidencetext").innerHTML = "How confident are you that this block is a <b>blicket</b>?";
+						}else{
+							document.getElementById("confidencetext").innerHTML = "How confident are you that this block is <b>not a blicket</b>?";
+						}
+					}else{
+						taskName = "blicketness";
+						blockNumber += 1;
+						var radios = document.getElementsByName('confidencetask');
+						for (var i = 0, length = radios.length; i < length; i++) {
+							if (radios[i].checked) {
+								selection = selection * parseInt(radios[i].value);
+								document.getElementById('radio'+radios[i].value).checked = false;
+								break;
+							}
+						}
+						$(document.getElementById("howConfident")).hide();
+						$(document.getElementById("isBlicket")).show();
+						localStorage["rating_"+currentBlock] = selection
+						blocktionary[currentBlock] = selection;
+						console.log(blocktionary);
+						if (blockNumber <= 7){
+							currentBlock = sampleBlocks[blockNumber];
+							document.getElementById('block1').src = "img/white.png";
+							document.getElementById('block2').src = "img/white.png";
+							setTimeout(changeImg(), 100);
+							source = "img/"+currentBlock+".png";
+						}else{
+							window.location.href = "./forcedchoice.html?c="+c;
+						}
+					}
+				}
+				function nextEnable() {
+					document.getElementById('button').disabled = false;
+				}
+				function shuffle(array) {
+	  				var currentIndex = array.length, temporaryValue, randomIndex;
+	  				while (0 !== currentIndex) {
+	    				randomIndex = Math.floor(Math.random() * currentIndex);
+	    				currentIndex -= 1;
+					    temporaryValue = array[currentIndex];
+					    array[currentIndex] = array[randomIndex];
+					    array[randomIndex] = temporaryValue;
+	  					}
+					return array;
+				}
+				seenConsistentBlocks = shuffle(seenConsistentBlocks)
+				seenInconsistentBlocks = shuffle(seenInconsistentBlocks)
+				unseenConsistentBlocks = shuffle(unseenConsistentBlocks)
+				unseenInconsistentBlocks = shuffle(unseenInconsistentBlocks)
+
+				sc = seenConsistentBlocks.slice(0,2)
+				si = seenInconsistentBlocks.slice(0,2)
+				uc = unseenConsistentBlocks.slice(0,2)
+				ui = unseenInconsistentBlocks.slice(0,2)
+				sampleBlocks = sc.concat(si,uc,ui)
+				sampleBlocks = shuffle(sampleBlocks)
+				currentBlock = sampleBlocks[blockNumber]
+				document.getElementById('block1').src = "img/"+currentBlock+".png";
+				document.getElementById('block2').src = "img/"+currentBlock+".png";
+		});
+
+		</script>
+	</head>
+	<body>
+	<!--In this section, participants rate whether blocks are blickets-->
+	<div id="isBlicket" style="text-align:center;margin-left:15%;margin-right:15%;margin-top:10%;font-family:helvetica;font-size:18px;">
+		<p>
+			Is this block a <b>blicket</b>?
+		</p>
+		<img src="" id="block1"/>
+			<div class="radio" id="select">
+				<form action="">
+					Yes
+  					<input type="radio" id="isBlicket0" name="blicketnesstask" value="1">
+  					No
+  					<input type="radio" id="isBlicket1" name="blicketnesstask" value="-1">
+					</form>
+		</div>
+	</div>
+	<!--In this section, participants rate their confidence-->
+	<div id="howConfident" style="text-align:center;margin-left:15%;margin-right:15%;margin-top:10%;font-family:helvetica;font-size:18px;">
+		<p id="confidencetext">
+			Is this block a <b>blicket</b>?
+		</p>
+		<img src="" id="block2"/>
+			<div class="radio" id="select">
+				<form action="">
+					Just guessing
+  					<input type="radio" id="radio1" name="confidencetask" value="1">
+  					<input type="radio" id="radio2" name="confidencetask" value="2">
+  					<input type="radio" id="radio3" name="confidencetask" value="3">
+  					<input type="radio" id="radio4" name="confidencetask" value="4">
+  					<input type="radio" id="radio5" name="confidencetask" value="5">
+  					<input type="radio" id="radio6" name="confidencetask" value="6">
+  					<input type="radio" id="radio7" name="confidencetask" value="7">
+  					Completely certain
+					</form>
+		</div>
+	</div>
+	<div class="next" style="text-align:center;margin-left:15%;margin-right:15%;">
+		<button type="button" id="button" style="margin-top:5px" onclick="" disabled="true">NEXT</button>
+	</div>
+	</body>
+</html>

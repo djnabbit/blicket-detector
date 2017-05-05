@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style>
+		.nexttext { font-weight: bold; color: #002A5C; }
+		.textbox {width:100%;padding:1px;}
+		</style>
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				document.getElementById("button").onclick = nextButton;
+				conditionarr = window.location.href.split("c=")
+				c = conditionarr[1]
+				function nextButton() {
+					var radios = document.getElementsByName("blicket");
+						for (var i = 0, length = radios.length; i < length; i++) {
+							if (radios[i].checked) {
+								q1 = radios[i].value;
+								break;
+							}
+						}
+					var radios = document.getElementsByName("notblicket");
+						for (var i = 0, length = radios.length; i < length; i++) {
+							if (radios[i].checked) {
+								q2 = radios[i].value;
+								break;
+							}
+						}
+					localStorage["attention1"] = q1
+					localStorage["attention2"] = q2
+					window.location.href = "./shapeperception.html"
+						
+				}
+			})
+		</script>
+	</head>
+	<body>	
+	<div style="text-align:center;margin-left:15%;margin-right:15%;margin-top:10%;font-family:helvetica;font-size:18px;";>
+		<p>
+			If we place a <b>blicket</b> on the machine, by itself, will the machine activate?
+			<div class="radio" id="b">
+				<form action="">
+  					<input type="radio" id="b1" name="blicket" value="1">
+  					Yes
+  					<input type="radio" id="b2" name="blicket" value="-1">
+  					No
+					</form>
+					<br><br>
+		</div>
+		If we place an object that is <b>not a blicket</b> on the machine, by itself, will the machine activate?<br><br>
+			<div class="radio" id="nb">
+				<form action="">
+  					<input type="radio" id="nb1" name="notblicket" value="-1">
+  					Yes
+  					<input type="radio" id="nb2" name="notblicket" value="1">
+  					No
+					</form>
+					<br><br>
+		</div>
+			<div class="next">
+				<button type="button" id="button" style="margin-top:15px">NEXT</button><br><br><br>
+			</div>
+		</p>
+	</div>
+	</body>
+</html>

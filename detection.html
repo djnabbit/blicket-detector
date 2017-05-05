@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style>
+		.nexttext { font-weight: bold; color: #002A5C; }
+		</style>
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){		
+			window.detected = false;
+		//Parses condition from GET parameter
+			conditionarr = window.location.href.split("c=")
+			c = conditionarr[1]
+		//Near condition, red distractor
+			if(c == 0) {
+				var consistentBlocks = ["rrrbb","rrbrr","rbrrb","rbrbr","rbbbr","bbrrr","bbrrr","bbrrb","bbrrb","bbrbb","bbbrr","bbbrb","bbbrb","bbbbr","bbbbr"];
+				var inconsistentBlocks = ["brrrr","brrbb","brbrb","brbbr","brbbb"]
+				blickets = ["rrrbb","rrbrr","rbrrb","rbrbr","rbbbr","brrrr","brrbb","brbrb","brbbr","brbbb"]
+				localStorage["condition"] = "near"
+				localStorage["distractor"] = "red"
+			}; 
+		//Near condition, blue distractor	
+			if(c == 1) {
+				var consistentBlocks = ["bbbrr","bbrbb","brbbr","brbrb","brrrb","rrbbb","rrbbb","rrbbr","rrbbr","rrbrr","rrrbb","rrrbr","rrrbr","rrrrb","rrrrb"];
+				var inconsistentBlocks = ["rbbbb","rbbrr","rbrbr","rbrrb","rbrrr"]
+				blickets = ["bbbrr","bbrbb","brbbr","brbrb","brrrb","rbbbb","rbbrr","rbrbr","rbrrb","rbrrr"]
+				localStorage["condition"] = "near"
+				localStorage["distractor"] = "blue"
+			};
+		//Distant condition, red distractor
+			if(c == 2) {
+				var consistentBlocks = ["rrrrr","rrrrb","rrrrb","rrrbb","rrbrr","rrbbr","rrbbb","rrbbb","bbrrr","bbrrr","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr"];
+				var inconsistentBlocks = ["rbrbb","rbbrr","rbbbr","brrbb","brbrb"]
+				blickets = ["rrrrr","rrrrb","rrrbb","rrbrr","rrbbr","rrbbb","brrbb","brbrb"]
+				localStorage["condition"] = "distant"
+				localStorage["distractor"] = "red"
+			}; 
+		//Distant condition, blue distractor
+			if(c == 3) {
+				var consistentBlocks = ["bbbbb","bbbbr","bbbbr","bbbrr","bbrbb","bbrrb","bbrrr","bbrrr","rrbbb","rrbbb","rrbrb","rrbrr","rrrbb","rrrbr","rrrrb"];
+				var inconsistentBlocks = ["brbrr","brrbb","brrrb","rbbrr","rbrbr"]
+				blickets = ["bbbbb","bbbbr","bbbrr","bbrbb","bbrrb","bbrrr","rbbrr","rbrbr"]
+				localStorage["condition"] = "distant"
+				localStorage["distractor"] = "blue"
+			};
+		//Next button cycles through block list, then triggers "blickets are blocks..." message
+			function nextButton() {
+				if (instructions == true){
+					$(document.getElementById("task")).show()
+					$(document.getElementById("instructions")).hide()
+					document.getElementById("button").disabled = true
+					instructions = false;
+					return;
+				}
+				$('.true-box').css('z-index','2');
+				$('.false-box').css('z-index','10');
+				document.getElementById("detectionStatus").innerHTML = "";
+				document.getElementById("nexttext").innerHTML = "";
+				if (blicketness == 1){
+					blicketNum += 1;
+					var blockID = "b"+blicketNum;
+					document.getElementById(blockID).src = "img/"+currentBlock+".png";
+				}else{
+					nblicketNum += 1;
+					var blockID = "nb"+nblicketNum;
+					document.getElementById(blockID).src = "img/"+currentBlock+".png";
+					}
+				if(blockIndex <= 18){
+					document.getElementById("button").disabled = true
+					$('.drag').css('left',280);
+					$('.drag').css('top',60);
+					blockIndex += 1;
+					blocksRemaining = 20 - blockIndex
+					document.getElementById("remaining").innerHTML = blocksRemaining;
+					currentBlock = blockList[blockIndex]
+					document.getElementById('current').src = "img/"+currentBlock+".png";
+				}else{
+					$('.true-box').css('top',20);
+					$('.true-box').css('left',300);
+					document.getElementById('trueBox').style.height = "132px"
+					document.getElementById('trueBox').style.width = "101px"
+					$('.false-box').css('top',200);
+					$('.false-box').css('left',300);
+					document.getElementById('falseBox').style.height = "132px"
+					document.getElementById('falseBox').style.width = "101px"
+					document.getElementById("remaining-text").innerHTML = ""
+					document.getElementById('message').innerHTML = 'Remember, blickets are blocks that activate the machine.<br><br>Please click <span class="nexttext">Next</span> to continue.'
+					$('.drag').css('top',-10000);
+					buttonurl = "location.href='./ratingintro.html?c="+c+"'"
+					document.getElementById('button').onclick = nextPage
+				}
+
+			function nextPage() {
+				np = "./ratingintro.html?c="+c
+				window.location.href = np
+			}
+
+			}
+			//List shuffle function
+			function shuffle(array) {
+  				var currentIndex = array.length, temporaryValue, randomIndex;
+  				while (0 !== currentIndex) {
+    				randomIndex = Math.floor(Math.random() * currentIndex);
+    				currentIndex -= 1;
+				    temporaryValue = array[currentIndex];
+				    array[currentIndex] = array[randomIndex];
+				    array[randomIndex] = temporaryValue;
+  					}
+				return array;
+			}
+
+			//   Shuffles consistent/inconsistent block lists and concatenates them
+			consistentBlocks = shuffle(consistentBlocks);
+			inconsistentBlocks = shuffle(inconsistentBlocks);
+			blockList = consistentBlocks.concat(inconsistentBlocks);
+			for (block in blockList){
+				document.getElementById("block"+block).src = "img/"+blockList[block]+".png";
+			}
+			var disX = 0;
+			var disY = 0;
+			blockIndex = 0;
+			blocksRemaining = 20
+			instructions = true;
+			currentBlock = blockList[blockIndex]
+			blicketNum = 0
+			nblicketNum = 0
+			$(document.getElementById("task")).hide()
+			document.getElementById('current').src = "img/"+currentBlock+".png";
+			document.getElementById("remaining").innerHTML = blocksRemaining;
+			
+
+			var con_left = $('.drag-con').offset().left;
+			var con_top = $('.drag-con').offset().top
+			var con_right = con_left + $('.drag-con').width();
+			var con_bottom = con_left + $('.drag-con').height();
+			var boxX = $('.drag-bg').offset().left;
+			var boxY = $('.drag-bg').offset().top;
+			$('.drag').css('left',280);
+			$('.drag').css('top',60);
+			document.getElementById("begintask").onclick = nextButton
+			document.getElementById("button").onclick = nextButton
+				//*新加了一个盒子的高度，移动的时候把高度减掉就可以了。
+	//			当按下鼠标的时候触发一个事件,把鼠标的坐标ev的值传进去
+			$('.drag').mousedown(function(ev){
+				
+	//				这样就能获取到鼠标的坐标了。ev.pageX是鼠标的坐标，减去方块到浏览器边边的坐标，就是鼠标离方块原点的坐标了。也就是以
+	//				不这样做的话就不能从鼠标点下去的地方进行拖拽了。
+				disX = ev.pageX - 280;
+				disY = ev.pageY - 60;
+	//				console.log($('.drag-bg').offset().left);
+	//				console.log(ev.pageX);
+	//				console.log(disX);
+	//				console.log($(this).offset().left);
+
+	//				console.log(disX);
+					
+				$(document).mousemove(function(ev){
+	//					当鼠标移动的时候,还是一样把鼠标的坐标传进去,鼠标离浏览器边边的值减去鼠标离方块边边的值就是方块到浏览器边边的值啦。
+	//					然后动态修改方块的left值
+	//					$('.drag').css('left',ev.pageX - disX);
+	//					$('.drag').css('top',ev.pageY - disY);
+	//					$('.drag').css('left','100px');
+						
+					var moveX = ev.pageX - boxX - disX;
+					var moveY = ev.pageY - boxY - disY;
+					$('.drag').css('left',moveX);
+					$('.drag').css('top',moveY);
+				});
+					
+				$(document).mouseup(function(ev){
+	//					dragX,就是你那个方块到浏览器的x坐标啦。这里才定义是为了在鼠标放下的时候再获取，毕竟是鼠标放下的时候才判断在不在里面的嘛。
+					var dragX = ev.pageX - disX;
+					var dragY = ev.pageY - disY;
+	//					输出一下坐标,便于测试
+	//				console.log(dragX);
+	//				console.log(dragY);
+	//				console.log(ev.pageX);
+	//				console.log(ev.pageY);
+	//				console.log(con_left);
+	//				console.log(con_right);
+					if(dragX>=con_left && dragX<=con_right && dragY>=con_top && dragY<=con_bottom){
+	//						z-index属性，简单来说就是值越大在越上面，跟PS的图层是一样的，我刚开始出了那个错就是没有把z-index重置，
+	//						导致每次都是10，所以底下那个真的没显示出来
+						window.detected = true
+						document.getElementById("button").disabled = false
+						document.getElementById("draghere").innerHTML = "";
+						document.getElementById("nexttext").innerHTML = "Press NEXT to continue";
+						if(blickets.indexOf(currentBlock) !== -1){
+							blicketness = 1;
+							$('.false-box').css('z-index','2');
+							$('.true-box').css('z-index','10');
+							document.getElementById("detectionStatus").innerHTML = "It activated!";
+							document.getElementById("detectionStatus").style.color = "green";
+						}else{
+							blicketness = 0;
+							document.getElementById("detectionStatus").innerHTML = "Nothing happened.";
+							document.getElementById("detectionStatus").style.color = "red";
+						}
+					}else{
+						$('.true-box').css('z-index','2');
+						$('.false-box').css('z-index','10');
+					}
+					//操作完之后就把事件注销掉
+					$(document).off();			
+				});
+				//如果没有return false的话，用chrome拖拽的时候会有一个禁止操作的鼠标图标
+				return false;
+
+			})
+		})
+	</script>
+	</head>
+	<body style="font-family:helvetica;" >
+<!--This div contains the "these are the blocks" section -->
+		<div id="instructions" style="text-align:center;margin-left:15%;margin-right:15%;margin-top:10%;font-family:helvetica;";>
+		<p style="font-size:28px;">
+			Blicket Detector
+		</p>
+		<p style="font-size:18px;margin-top:-15px;">
+			These are the blocks:
+		</p>
+		<div style="float:center;">
+			<img src="img/white.png" height=50 width=50 id="block0"/>
+			<img src="img/white.png" height=50 width=50 id="block1"/>
+			<img src="img/white.png" height=50 width=50 id="block2"/>
+			<img src="img/white.png" height=50 width=50 id="block3"/>
+			<img src="img/white.png" height=50 width=50 id="block4"/>
+			<br>
+			<img src="img/white.png" height=50 width=50 id="block5"/>
+			<img src="img/white.png" height=50 width=50 id="block6"/>
+			<img src="img/white.png" height=50 width=50 id="block7"/>
+			<img src="img/white.png" height=50 width=50 id="block8"/>
+			<img src="img/white.png" height=50 width=50 id="block9"/>
+			<br>
+			<img src="img/white.png" height=50 width=50 id="block10"/>
+			<img src="img/white.png" height=50 width=50 id="block11"/>
+			<img src="img/white.png" height=50 width=50 id="block12"/>
+			<img src="img/white.png" height=50 width=50 id="block13"/>
+			<img src="img/white.png" height=50 width=50 id="block14"/>
+			<br>
+			<img src="img/white.png" height=50 width=50 id="block15"/>
+			<img src="img/white.png" height=50 width=50 id="block16"/>
+			<img src="img/white.png" height=50 width=50 id="block17"/>
+			<img src="img/white.png" height=50 width=50 id="block18"/>
+			<img src="img/white.png" height=50 width=50 id="block19"/>
+			<br>
+		</div>
+		<p style="font-size:18px;">
+			In the next task, you will determine which blocks are <b>blickets</b> by dragging them onto the <b>blicket detector</b> one at a time.
+			<br><br>
+			Click <span class=nexttext>NEXT</span> to continue	
+		</p>
+		</p>
+			<button type="button" id="begintask" onclick="">NEXT</button>
+		</div>
+<!--This div contains the blicket detector task -->
+		<div id="task" class="drag-bg" style="margin-left:-100px;">
+			<div class="img-box">
+			<div class="drag-con">
+			</div>
+				<div class="true-box">
+					<img src="img/true.gif" id="trueBox"/>
+				</div>
+				<div class="false-box">
+					<img src="img/false.png" id="falseBox"/>
+				</div>
+				<div style="float:right;margin-left:265px;font-size:28px">
+					<p><a id="detectionStatus"></a></p>
+				</div>
+				<div style="text-align:center">
+					<p style="margin-left:45px;margin-top:50px;font-size:32px"><a id="draghere">Drag the<br>block here!</a></p>
+				</div>
+				<div style="float:left;margin-left:0px;margin-top:0px;font-size:32px">
+					<p><a id="message"></a></p>
+				</div>
+				<div style="float:right;margin-left:420px;margin-top:-30px;font-size:28px">
+					<p>Blickets</p>
+				</div>
+				<div style="float:right;margin-left:420px;margin-top:150px;font-size:28px">
+					<p>Not&nbsp;Blickets</p>
+				</div>
+				<div style="float:right;margin-left:420px;margin-top:40px">
+					<img src="img/white.png" height=50 width=50 id="b1"/>
+				</div>
+				<div style="float:right;margin-left:480px;margin-top:40px">
+					<img src="img/white.png" height=50 width=50 id="b2"/>
+				</div>
+				<div style="float:right;margin-left:540px;margin-top:40px">
+					<img src="img/white.png" height=50 width=50 id="b3"/>
+				</div>
+				<div style="float:right;margin-left:600px;margin-top:40px">
+					<img src="img/white.png" height=50 width=50 id="b4"/>
+				</div>
+				<div style="float:right;margin-left:660px;margin-top:40px">
+					<img src="img/white.png" height=50 width=50 id="b5"/>
+				</div>
+				<div style="float:right;margin-left:420px;margin-top:100px">
+					<img src="img/white.png" height=50 width=50 id="b6"/>
+				</div>
+				<div style="float:right;margin-left:480px;margin-top:100px">
+					<img src="img/white.png" height=50 width=50 id="b7"/>
+				</div>
+				<div style="float:right;margin-left:540px;margin-top:100px">
+					<img src="img/white.png" height=50 width=50 id="b8"/>
+				</div>
+				<div style="float:right;margin-left:600px;margin-top:100px">
+					<img src="img/white.png" height=50 width=50 id="b9"/>
+				</div>
+				<div style="float:right;margin-left:660px;margin-top:100px">
+					<img src="img/white.png" height=50 width=50 id="b10"/>
+				</div>
+				<div style="float:right;margin-left:420px;margin-top:220px">
+					<img src="img/white.png" height=50 width=50 id="nb1"/>
+				</div>
+				<div style="float:right;margin-left:480px;margin-top:220px">
+					<img src="img/white.png" height=50 width=50 id="nb2"/>
+				</div>
+				<div style="float:right;margin-left:540px;margin-top:220px">
+					<img src="img/white.png" height=50 width=50 id="nb3"/>
+				</div>
+				<div style="float:right;margin-left:600px;margin-top:220px">
+					<img src="img/white.png" height=50 width=50 id="nb4"/>
+				</div>
+				<div style="float:right;margin-left:660px;margin-top:220px">
+					<img src="img/white.png" height=50 width=50 id="nb5"/>
+				</div>
+				<div style="float:right;margin-left:420px;margin-top:280px">
+					<img src="img/white.png" height=50 width=50 id="nb6"/>
+				</div>
+				<div style="float:right;margin-left:480px;margin-top:280px">
+					<img src="img/white.png" height=50 width=50 id="nb7"/>
+				</div>
+				<div style="float:right;margin-left:540px;margin-top:280px">
+					<img src="img/white.png" height=50 width=50 id="nb8"/>
+				</div>
+				<div style="float:right;margin-left:600px;margin-top:280px">
+					<img src="img/white.png" height=50 width=50 id="nb9"/>
+				</div>
+				<div style="float:right;margin-left:660px;margin-top:280px">
+					<img src="img/white.png" height=50 width=50 id="nb10"/>
+				</div>
+				<div id="remaining-text" style="float:left;margin-top:330px;margin-right:-100px;font-size:28px;">
+					<p><a id="remaining"></a> blocks remaining<br>
+					<a id="nexttext"></a></p>
+				</div>
+				<div class="next" style="margin-top:430px">
+					<button type="button" id="button" disabled="true" onclick="">NEXT</button>
+				</div>
+			</div>
+
+		<img class="drag" src="img/blank.png" id="current"/>
+	</div>
+	</body>
+</html>
