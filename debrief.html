@@ -14,7 +14,9 @@
 		<script type="text/javascript">
 			$(function(){
 				document.getElementById("button").onclick = nextButton;
-				var data = localStorage;
+				function nextButton() {
+					localStorage["comments"] = document.getElementById("textbox").value
+					var data = localStorage;
 					$.ajax({
 						url: './data.php',
 						type: 'post',
@@ -22,8 +24,6 @@
 						data: JSON.stringify(data),
 						dataType:'json'
 					});
-				function nextButton() {
-					comments = document.getElementById("textbox").value
 					window.location.href = "./code.html"
 				};
 			})
