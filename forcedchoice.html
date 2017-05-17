@@ -19,31 +19,31 @@
 			c = conditionarr[1];
 			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
 			if(c == 0) {
-					var seenConsistentBlocks = ["rrbrr","rrbrr","rrbrb","rrbrb","rrbrb","rrbbr","rrbbr","rrbbb","rrbbb","rrbbb","brrrr","brrbb","brbrb","bbrbr","bbbrr"];
-					var seenInconsistentBlocks = ["rrrrb","rrrbr","rbrbb","rbbrr","rbbbr"]
-					blickets = ["rrbrr","rrbrb","rrbbr","rrbbb"]
-					nonBlickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"]
+				var seenConsistentBlocks = ["rrbrr","rbbrb","rrbbb","rbbbr","brrrr","brrrb","bbbrr"];
+				var seenInconsistentBlocks = ["rbrrr","rbrbb","brbbb"];
+				blickets = ["rrbrr","rrbrb","rbbrr","rbbrb","rrbbr","rrbbb","rbbbr","rbbbb","brrbr","brrbb","bbrbr","bbrbb","brbbr","brbbb","bbbbr","bbbbb"]
+				nonBlickets = ["rrrrr","rrrrb","rbrrr","rbrrb","rrrbr","rrrbb","rbrbr","rbrbb","brrrr","brrrb","bbrrr","bbrrb","brbrr","brbrb","bbbrr","bbbrb"]
 				}; 
 			//Near condition, blue distractor	
-				if(c == 1) {
-					var seenConsistentBlocks = ["bbrbb","bbrbb","bbrbr","bbrbr","bbrbr","bbrrb","bbrrb","bbrrr","bbrrr","bbrrr","rbbbb","rbbrr","rbrbr","rrbrb","rrrbb"];
-					var seenInconsistentBlocks = ["bbbbr","bbbrb","brbrr","brrbb","brrrb"]
-					blickets = ["bbrbb","bbrbr","bbrrb","bbrrr"]
-					nonBlickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbbrr","bbbrb","bbbbr","bbbbb"]
+			if(c == 1) {
+				var seenConsistentBlocks = ["rrrbr","rrrbb","rrbrb","rbbrb","brrrr","bbrrb","bbbbr"];
+				var seenInconsistentBlocks = ["rbrrr","rrbbb","bbrbr"];
+				blickets = ["rrrbr","rrrbb","rbrbr","rbrbb","rrbrr","rrbrb","rbbrr","rbbrb","brrbr","brrbb","bbrbr","bbrbb","brbrr","brbrb","bbbrr","bbbrb"];
+				nonBlickets = ["rrrrr","rrrrb","rbrrr","rbrrb","rrbbr","rrbbb","rbbbr","rbbbb","brrrr","brrrb","bbrrr","bbrrb","brbbr","brbbb","bbbbr","bbbbb"];
 				};
 			//Distant condition, red distractor
-				if(c == 2) {
-					var seenConsistentBlocks = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr"];
-					var seenInconsistentBlocks = ["rbrbb","rbbrr","rbbbr","brrbb","brbrb"]
-					blickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb"]
-					nonBlickets = ["rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"]
+			if(c == 2) {
+				var seenConsistentBlocks = ["bbrbb","brrbr","bbrrr","brrrb","rbbbb","rbbbr","rrrbb"];
+				var seenInconsistentBlocks = ["brbbb","brbrr","rbrrr"];
+				blickets = ["bbrbb","bbrbr","brrbb","brrbr","bbrrb","bbrrr","brrrb","brrrr","rbbrb","rbbrr","rrbrb","rrbrr","rbrrb","rbrrr","rrrrb","rrrrr"]
+				nonBlickets = ["bbbbb","bbbbr","brbbb","brbbr","bbbrb","bbbrr","brbrb","brbrr","rbbbb","rbbbr","rrbbb","rrbbr","rbrbb","rbrbr","rrrbb","rrrbr"]
 				}; 
 			//Distant condition, blue distractor
-				if(c == 3) {
-					var seenConsistentBlocks = ["bbbbb","bbbbr","bbbrb","bbbrr","bbrbb","bbrbr","bbrrb","bbrrr","rrbbb","rrbbr","rrbrb","rrbrr","rrrbb","rrrbr","rrrrb"];
-					var seenInconsistentBlocks = ["brbrr","brrbb","brrrb","rbbrr","rbrbr"]
-					blickets = ["bbbbb","bbbbr","bbbrb","bbbrr","bbrbb","bbrbr","bbrrb","bbrrr","rbbbb","rbbbr","rbbrb","rbbrr","rbrbb","rbrbr","rbrrb","rbrrr"]
-					nonBlickets = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb"]
+			if(c == 3) {
+				var seenConsistentBlocks = ["bbbrb","bbbrr","bbrbr","brrbr","rbbbb","rrbbr","rrrrb"];
+				var seenInconsistentBlocks = ["brbbb","bbrrr","rrbrb"];
+				blickets = ["bbbrb","bbbrr","brbrb","brbrr","bbrbb","bbrbr","brrbb","brrbr","rbbrb","rbbrr","rrbrb","rrbrr","rbrbb","rbrbr","rrrbb","rrrbr"];
+				nonBlickets = ["bbbbb","bbbbr","brbbb","brbbr","bbrrb","bbrrr","brrrb","brrrr","rbbbb","rbbbr","rrbbb","rrbbr","rbrrb","rbrrr","rrrrb","rrrrr"];
 				};
 				function changeImg() {
 					if (r=1){

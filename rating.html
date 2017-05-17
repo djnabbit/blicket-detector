@@ -29,32 +29,33 @@
 			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
 		//Near condition, red distractor
 			if(c == 0) {
-				var seenConsistentBlocks = ["rrrbb","rrbrr","rbrrb","rbrbr","rbbbr","bbrrr","bbrrb","bbrbb","bbbrr","bbbrb","bbbbr"];
-				var seenInconsistentBlocks = ["brrrr","brrbb","brbrb","brbbr","brbbb"];
-				var unseenConsistentBlocks = ["rrrrr","rrrrb","rrrbr","rrbrb","rrbbr","rrbbb","rbrrr","rbrbb","rbbrr","rbbrb","rbbbb","bbrbr","bbbbb"];
-				var unseenInconsistentBlocks = ["brrrb","brrbr","brbrr"];
+				var seenConsistentBlocks = ["rrbrr","rbbrb","rrbbb","rbbbr","brrrr","brrrb","bbbrr"];
+				var seenInconsistentBlocks = ["rbrrr","rbrbb","brbbb"];
+				var unseenConsistentBlocks = ["rrbrb","rbbrr","rrbbr","rbbbb","bbrrr","bbrrb","brbrr","brbrb","bbbrb",]
+				var unseenInconsistentBlocks = ["rrrrr","rrrrb","rbrrb","rrrbr","rrrbb","rbrbr","brrbr","brrbb","bbrbr","bbrbb","brbbr","bbbbr","bbbbb"];
 			}; 
 		//Near condition, blue distractor	
 			if(c == 1) {
-				var seenConsistentBlocks = ["bbbrr","bbrbb","brbbr","brbrb","brrrb","rrbbb","rrbbr","rrbrr","rrrbb","rrrbr","rrrrb"];
-				var seenInconsistentBlocks = ["rbbbb","rbbrr","rbrbr","rbrrb","rbrrr"];
-				var unseenConsistentBlocks = ["bbbbb","bbbbr","bbbrb","bbrbr","bbrrb","bbrrr","brbbb","brbrr","brrbb","brrbr","brrrr","rrbrb","rrrrr"];
-				var unseenInconsistentBlocks = ["rbbbr","rbbrb","rbrbb"];
+				var seenConsistentBlocks = ["rrrbr","rrrbb","rrbrb","rbbrb","brrrr","bbrrb","bbbbr"];
+				var seenInconsistentBlocks = ["rbrrr","rrbbb","bbrbr"];
+				var unseenConsistentBlocks = ["rbrbr","rbrbb","rrbrr","rbbrr","brrrb","bbrrr","brbbr","brbbb","bbbbb"];
+				var unseenInconsistentBlocks = ["rrrrr","rrrrb","rbrrb","rrbbr","rbbbr","rbbbb","brrbr","brrbb","bbrbb","brbrr","brbrb","bbbrr","bbbrb"];
 			};
 			//Distant condition, red distractor
-				if(c == 2) {
-					var seenConsistentBlocks = ["rrrrr","rrrrb","rrrbb","rrbrr","rrbbr","rrbbb","bbrrr","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr"];
-					var seenInconsistentBlocks = ["rbrbb","rbbrr","rbbbr","brrbb","brbrb"]
-					var unseenConsistentBlocks = ["rrrbr","rrbrb","bbrrb","bbbbb"];
-					var unseenInconsistentBlocks = ["rbrrr","rbrrb","rbrbr","rbbrb","rbbbb","brrrr","brrrb","brrbr","brbrr","brbbr","brbbb"];
+			if(c == 2) {
+				var seenConsistentBlocks = ["bbrbb","brrbr","bbrrr","brrrb","rbbbb","rbbbr","rrrbb"];
+				var seenInconsistentBlocks = ["brbbb","brbrr","rbrrr"];
+				var unseenConsistentBlocks = ["bbrbr","brrbb","bbrrb","brrrr","rrbbb","rrbbr","rbrbb","rbrbr","rrrbr",]
+				var unseenInconsistentBlocks = ["bbbbb","bbbbr","brbbr","bbbrb","bbbrr","brbrb","rbbrb","rbbrr","rrbrb","rrbrr","rbrrb","rrrrb","rrrrr"];
 				}; 
 			//Distant condition, blue distractor
-				if(c == 3) {
-					var seenConsistentBlocks = ["bbbbb","bbbbr","bbbrr","bbrbb","bbrrb","bbrrr","rrbbb","rrbrb","rrbrr","rrrbb","rrrbr","rrrrb"];
-					var seenInconsistentBlocks = ["brbrr","brrbb","brrrb","rbbrr","rbrbr"]
-					var unseenConsistentBlocks = ["bbbrb","bbrbr","rrbbr","rrrrr"];
-					var unseenInconsistentBlocks = ["brbbb","brbbr","brbrb","brrbr","brrrr","rbbbb","rbbbr","rbbrb","rbrbb","rbrrb","rbrrr"];
+			if(c == 3) {
+				var seenConsistentBlocks = ["bbbrb","bbbrr","bbrbr","brrbr","rbbbb","rrbbr","rrrrb"];
+				var seenInconsistentBlocks = ["brbbb","bbrrr","rrbrb"];
+				var unseenConsistentBlocks = ["brbrb","brbrr","bbrbb","brrbb","rbbbr","rrbbb","rbrrb","rbrrr","rrrrr"];
+				var unseenInconsistentBlocks = ["bbbbb","bbbbr","brbbr","bbrrb","brrrb","brrrr","rbbrb","rbbrr","rrbrr","rbrbb","rbrbr","rrrbb","rrrbr"];
 				};
+
 				function changeImg() {
 					return function(){
 						document.getElementById('block1').src = source;
