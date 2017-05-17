@@ -16,33 +16,33 @@
 			c = conditionarr[1]
 		//Near condition, red distractor
 			if(c == 0) {
-				var consistentBlocks = ["rrrbb","rrbrr","rbrrb","rbrbr","rbbbr","bbrrr","bbrrr","bbrrb","bbrrb","bbrbb","bbbrr","bbbrb","bbbrb","bbbbr","bbbbr"];
-				var inconsistentBlocks = ["brrrr","brrbb","brbrb","brbbr","brbbb"]
-				blickets = ["rrrbb","rrbrr","rbrrb","rbrbr","rbbbr","brrrr","brrbb","brbrb","brbbr","brbbb"]
+				var consistentBlocks = ["rrbrr","rbbrb","rrbbb","rbbbr","brrrr","brrrb","bbbrr"];
+				var inconsistentBlocks = ["rbrrr","rbrbb","brbbb"];
+				blickets = ["rrbrr","rbbrb","rrbbb","rbbbr","brbbb"];
 				localStorage["condition"] = "near"
 				localStorage["distractor"] = "red"
 			}; 
 		//Near condition, blue distractor	
 			if(c == 1) {
-				var consistentBlocks = ["bbbrr","bbrbb","brbbr","brbrb","brrrb","rrbbb","rrbbb","rrbbr","rrbbr","rrbrr","rrrbb","rrrbr","rrrbr","rrrrb","rrrrb"];
-				var inconsistentBlocks = ["rbbbb","rbbrr","rbrbr","rbrrb","rbrrr"]
-				blickets = ["bbbrr","bbrbb","brbbr","brbrb","brrrb","rbbbb","rbbrr","rbrbr","rbrrb","rbrrr"]
+				var consistentBlocks = ["rrrbr","rrrbb","rrbrb","rbbrb","brrrr","bbrrb","bbbbr"];
+				var inconsistentBlocks = ["rbrrr","rrbbb","bbrbr"];
+				blickets = ["rrrbr","rrrbb","rrbrb","rbbrb","bbrbr"];
 				localStorage["condition"] = "near"
 				localStorage["distractor"] = "blue"
 			};
 		//Distant condition, red distractor
 			if(c == 2) {
-				var consistentBlocks = ["rrrrr","rrrrb","rrrrb","rrrbb","rrbrr","rrbbr","rrbbb","rrbbb","bbrrr","bbrrr","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr"];
-				var inconsistentBlocks = ["rbrbb","rbbrr","rbbbr","brrbb","brbrb"]
-				blickets = ["rrrrr","rrrrb","rrrbb","rrbrr","rrbbr","rrbbb","brrbb","brbrb"]
+				var consistentBlocks = ["bbrbb","brrbr","bbrrr","brrrb","rbbbb","rbbbr","rrrbb"];
+				var inconsistentBlocks = ["brbbb","brbrr","rbrrr"];
+				blickets = ["bbrbb","brrbr","bbrrr","brrrb","rbrrr"];
 				localStorage["condition"] = "distant"
 				localStorage["distractor"] = "red"
 			}; 
 		//Distant condition, blue distractor
 			if(c == 3) {
-				var consistentBlocks = ["bbbbb","bbbbr","bbbbr","bbbrr","bbrbb","bbrrb","bbrrr","bbrrr","rrbbb","rrbbb","rrbrb","rrbrr","rrrbb","rrrbr","rrrrb"];
-				var inconsistentBlocks = ["brbrr","brrbb","brrrb","rbbrr","rbrbr"]
-				blickets = ["bbbbb","bbbbr","bbbrr","bbrbb","bbrrb","bbrrr","rbbrr","rbrbr"]
+				var consistentBlocks = ["bbbrb","bbbrr","bbrbr","brrbr","rbbbb","rrbbr","rrrrb"];
+				var inconsistentBlocks = ["brbbb","bbrrr","rrbrb"];
+				blickets = ["bbbrb","bbbrr","bbrbr","brrbr","rrbrb"];
 				localStorage["condition"] = "distant"
 				localStorage["distractor"] = "blue"
 			};
@@ -68,12 +68,12 @@
 					var blockID = "nb"+nblicketNum;
 					document.getElementById(blockID).src = "img/"+currentBlock+".png";
 					}
-				if(blockIndex <= 18){
+				if(blockIndex <= 8){
 					document.getElementById("button").disabled = true
 					$('.drag').css('left',280);
 					$('.drag').css('top',60);
 					blockIndex += 1;
-					blocksRemaining = 20 - blockIndex
+					blocksRemaining = 10 - blockIndex
 					document.getElementById("remaining").innerHTML = blocksRemaining;
 					currentBlock = blockList[blockIndex]
 					document.getElementById('current').src = "img/"+currentBlock+".png";
@@ -235,18 +235,6 @@
 			<img src="img/white.png" height=50 width=50 id="block8"/>
 			<img src="img/white.png" height=50 width=50 id="block9"/>
 			<br>
-			<img src="img/white.png" height=50 width=50 id="block10"/>
-			<img src="img/white.png" height=50 width=50 id="block11"/>
-			<img src="img/white.png" height=50 width=50 id="block12"/>
-			<img src="img/white.png" height=50 width=50 id="block13"/>
-			<img src="img/white.png" height=50 width=50 id="block14"/>
-			<br>
-			<img src="img/white.png" height=50 width=50 id="block15"/>
-			<img src="img/white.png" height=50 width=50 id="block16"/>
-			<img src="img/white.png" height=50 width=50 id="block17"/>
-			<img src="img/white.png" height=50 width=50 id="block18"/>
-			<img src="img/white.png" height=50 width=50 id="block19"/>
-			<br>
 		</div>
 		<p style="font-size:18px;">
 			In the next task, you will determine which blocks are <b>blickets</b> by dragging them onto the <b>blicket detector</b> one at a time.
@@ -297,21 +285,6 @@
 				<div style="float:right;margin-left:660px;margin-top:40px">
 					<img src="img/white.png" height=50 width=50 id="b5"/>
 				</div>
-				<div style="float:right;margin-left:420px;margin-top:100px">
-					<img src="img/white.png" height=50 width=50 id="b6"/>
-				</div>
-				<div style="float:right;margin-left:480px;margin-top:100px">
-					<img src="img/white.png" height=50 width=50 id="b7"/>
-				</div>
-				<div style="float:right;margin-left:540px;margin-top:100px">
-					<img src="img/white.png" height=50 width=50 id="b8"/>
-				</div>
-				<div style="float:right;margin-left:600px;margin-top:100px">
-					<img src="img/white.png" height=50 width=50 id="b9"/>
-				</div>
-				<div style="float:right;margin-left:660px;margin-top:100px">
-					<img src="img/white.png" height=50 width=50 id="b10"/>
-				</div>
 				<div style="float:right;margin-left:420px;margin-top:220px">
 					<img src="img/white.png" height=50 width=50 id="nb1"/>
 				</div>
@@ -326,21 +299,6 @@
 				</div>
 				<div style="float:right;margin-left:660px;margin-top:220px">
 					<img src="img/white.png" height=50 width=50 id="nb5"/>
-				</div>
-				<div style="float:right;margin-left:420px;margin-top:280px">
-					<img src="img/white.png" height=50 width=50 id="nb6"/>
-				</div>
-				<div style="float:right;margin-left:480px;margin-top:280px">
-					<img src="img/white.png" height=50 width=50 id="nb7"/>
-				</div>
-				<div style="float:right;margin-left:540px;margin-top:280px">
-					<img src="img/white.png" height=50 width=50 id="nb8"/>
-				</div>
-				<div style="float:right;margin-left:600px;margin-top:280px">
-					<img src="img/white.png" height=50 width=50 id="nb9"/>
-				</div>
-				<div style="float:right;margin-left:660px;margin-top:280px">
-					<img src="img/white.png" height=50 width=50 id="nb10"/>
 				</div>
 				<div id="remaining-text" style="float:left;margin-top:330px;margin-right:-100px;font-size:28px;">
 					<p><a id="remaining"></a> blocks remaining<br>
