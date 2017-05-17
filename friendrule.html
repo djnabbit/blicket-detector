@@ -16,16 +16,16 @@
 				c = conditionarr[1]
 				document.getElementById("realrule").src = "./img/rule_"+c+".png"
 				if(c==0){
-					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the background and the colour of the border:<br><br>-  If the <b>block background is red</b>, the block is a blicket.<br><br>-  If the <b>block background is blue</b> and the colour of the <b>border is red</b>, then the block is also a blicket (see image below)."
+					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the background and the colours of the corners and centre-left triangle:<br><br>-  If the <b>block background is red</b> and the <b>corners are blue</b>, the block is a blicket.<br><br>-  If the <b>block background is blue</b> and the <b>centre-left triangle is blue</b>, then the block is also a blicket (see image below)."
 				}
 				if(c==1){
-					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the background and the colour of the border:<br><br>-  If the <b>block background is blue</b>, the block is a blicket.<br><br>-  If the <b>block background is red</b> and the colour of the <b>border is blue</b>, then the block is also a blicket (see image below)."
+					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the background and the colours of the corners and centre-left triangle:<br><br>-  If the <b>block background is blue</b> and the <b>corners are red</b>, the block is a blicket.<br><br>-  If the <b>block background is red</b> and the <b>centre-left triangle is red</b>, then the block is also a blicket (see image below)."
 				}
 				if(c==2){
-					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the colour of the border:<br><br>-  If the <b>border is red</b>, the block is a blicket (see image below)."
+					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the colours of the corners and centre-left triangle:<br><br>-  If the <b>corners and centre-left triangle are different colours</b>, the block is a blicket (see image below)."
 				}
 				if(c==3){
-					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the colour of the border:<br><br>-  If the <b>border is red</b>, the block is a blicket (see image below)."
+					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the colours of the corners and centre-left triangle:<br><br>-  If the <b>corners and centre-left triangle are different colours</b>, the block is a blicket (see image below)."
 				}
 				function nextButton() {
 					var radios = document.getElementsByName('select');
@@ -44,8 +44,8 @@
 	<div style="text-align:center;margin-left:15%;margin-right:15%;margin-top:10%;font-family:helvetica;";>
 		<p style="font-size:18px;margin-top:-25px;" id="explanation">
 		</p>
-		<img src="" id="realrule" style="width:100%;height:auto;margin-top:-15px;"/>
-		<p style="font-size:18px;margin-top:-15px;">
+		<img src="" id="realrule" style="width:300px;height:auto;"/>
+		<p style="font-size:18px;">
 			<b>Assuming your friend's explanation is different from the one you gave before, which explanation do you prefer now?</b><br><br>(If both explanations are the same, skip this question.)
 			<div class="radio" id="select">
 				<form action="">
