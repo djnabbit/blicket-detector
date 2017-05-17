@@ -16,8 +16,12 @@
 				document.getElementById("button").onclick = nextButton;
 				document.getElementById("yes").onclick = nextEnable;
 				document.getElementById("no").onclick = nextEnable;
-				sessionID = Math.floor(Math.random() * 10000);
-				localStorage["sessionID"] = sessionID
+				// CL: TODO: Link session s.t. we can use it to track completion
+				sessionId = Math.floor(Math.random() * 10000);
+                                // Changed "sessionID" to "sessionId" For consistency with back-end
+				localStorage["sessionId"] = sessionId
+				localStorage["experimentId"] = "ee-blicket-2017-05-17";
+				// CL: Why isn't c stored? Wouldn't that be useful?
 				c = Math.floor(Math.random() * 4);
 				function nextButton() {
 					var radios = document.getElementsByName('consent');
