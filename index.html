@@ -11,13 +11,21 @@
 		</style>
 		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			var queryDict = {}
+			location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
+		</script>
+		<script type="text/javascript">
 			$(function(){
 				console.log(window.location.hostname)
 				document.getElementById("button").onclick = nextButton;
 				document.getElementById("yes").onclick = nextEnable;
 				document.getElementById("no").onclick = nextEnable;
-				sessionID = Math.floor(Math.random() * 10000);
-				localStorage["sessionID"] = sessionID
+                // Changed "sessionID" to "sessionId" For consistency with back-end; obtaining from params
+                sessionId = queryDict["sessionId"];
+                console.log(sessionId);
+				localStorage["sessionId"] = sessionId;
+				localStorage["experimentId"] = "ee-blicket-2017-05-17";
+				// CL: Why isn't c put into localStorage here, rather than in the introduction?
 				c = Math.floor(Math.random() * 4);
 				function nextButton() {
 					var radios = document.getElementsByName('consent');
@@ -30,7 +38,7 @@
 					console.log(selection)
 					if (selection == 0){
 						window.location.href = "./introduction.html"+"?c="+c;
-					}else{
+					} else {
 						window.location.href = "./end.html"
 					}
 				};
