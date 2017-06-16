@@ -11,6 +11,18 @@
 		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$(function(){
+				var nextButton = function() {
+					var radios = document.getElementsByName('preference');
+						for (var i = 0, length = radios.length; i < length; i++) {
+							if (radios[i].checked) {
+								localStorage["rulepreference"] = radios[i].value; //i+1;
+								console.log("stored rulepreference");
+								break;
+							}
+						}
+					window.location.href = "./attention.html?c="+c
+				}
+				console.log("nextButton defined");
 				document.getElementById("button").onclick = nextButton;
 				conditionarr = window.location.href.split("c=")
 				c = conditionarr[1]
@@ -27,16 +39,7 @@
 				if(c==3){
 					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the colours of the corners and centre-left triangle:<br><br>-  If the <b>corners and centre-left triangle are different colours</b>, the block is a blicket (see image below)."
 				}
-				function nextButton() {
-					var radios = document.getElementsByName('select');
-						for (var i = 0, length = radios.length; i < length; i++) {
-							if (radios[i].checked) {
-								localStorage["rulepreference"] = i+1;
-								break;
-							}
-						}
-					window.location.href = "./attention.html?c="+c
-			}
+
 		})
 		</script>
 	</head>
