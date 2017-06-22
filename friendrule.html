@@ -22,6 +22,9 @@
 						}
 					window.location.href = "./attention.html?c="+c
 				}
+				var nextEnable = function() {
+					document.getElementById("next").disabled = false;
+				}
 				var sameButton = function() {
 					localStorage["rulepreference"] = "(same)";
 					console.log("stored rulepreference")
@@ -30,6 +33,14 @@
 				console.log("nextButton defined");
 				document.getElementById("next").onclick = nextButton;
 				document.getElementById("same").onclick = sameButton;
+				document.getElementById("next").disabled = true;
+				document.getElementById("radio1").onclick = nextEnable;
+				document.getElementById("radio2").onclick = nextEnable;
+				document.getElementById("radio3").onclick = nextEnable;
+				document.getElementById("radio4").onclick = nextEnable;
+				document.getElementById("radio5").onclick = nextEnable;
+				document.getElementById("radio6").onclick = nextEnable;
+				document.getElementById("radio7").onclick = nextEnable;
 				conditionarr = window.location.href.split("c=")
 				c = conditionarr[1]
 				document.getElementById("realrule").src = "./img/rule_"+c+".png"
@@ -55,7 +66,7 @@
 		</p>
 		<img src="" id="realrule" style="width:310px;height:auto;"/>
 		<p style="font-size:18px;">
-			<b>Assuming your friend's explanation is different from the one you gave before, which explanation do you prefer now?</b><br><br>(If both explanations are the same, skip this question.)
+			<b>Assuming your friend's explanation is different from the one you gave before, which explanation do you prefer now?</b>
 			<div class="radio" id="select">
 				<form action="">
 					Friend's answer
@@ -70,7 +81,7 @@
 					</form>
 					<br><br>
 		</div>
-			Click <span class=nexttext>NEXT</span> once you have made your selection. Alternatively, if your friend's explanation is the same as the rule you gave before, click <span class=nexttext>Rules are the same</span>.
+			Click <span class=nexttext>NEXT</span> once you have made your selection.<br><br>Alternatively, if your friend's explanation is the same as the rule you gave before, click <span class=nexttext>Rules are the same</span>.
 		</p>
 			<div class="next">
 				<button type="button" id="next" style="margin-top:15px">NEXT</button><br><br><br>
