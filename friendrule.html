@@ -22,8 +22,14 @@
 						}
 					window.location.href = "./attention.html?c="+c
 				}
+				var sameButton = function() {
+					localStorage["rulepreference"] = "(same)";
+					console.log("stored rulepreference")
+					window.location.href = "./attention.html?c="+c
+				}
 				console.log("nextButton defined");
-				document.getElementById("button").onclick = nextButton;
+				document.getElementById("next").onclick = nextButton;
+				document.getElementById("same").onclick = sameButton;
 				conditionarr = window.location.href.split("c=")
 				c = conditionarr[1]
 				document.getElementById("realrule").src = "./img/rule_"+c+".png"
@@ -64,10 +70,13 @@
 					</form>
 					<br><br>
 		</div>
-			Click <span class=nexttext>NEXT</span> once you have made your selection.
+			Click <span class=nexttext>NEXT</span> once you have made your selection. Alternatively, if your friend's explanation is the same as the rule you gave before, click <span class=nexttext>Rules are the same</span>.
 		</p>
 			<div class="next">
-				<button type="button" id="button" style="margin-top:15px">NEXT</button><br><br><br>
+				<button type="button" id="next" style="margin-top:15px">NEXT</button><br><br><br>
+			</div>
+			<div class="next">
+				<button type="button" id="same" style="margin-top:15px">Rules are the same</button><br><br><br>
 			</div>
 		</p>
 	</div>
