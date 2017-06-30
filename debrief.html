@@ -36,18 +36,14 @@
 				document.getElementById("button").onclick = nextButton;
 				function nextButton() {
 				localStorage["comments"] = document.getElementById("textbox").value;
+                var currentDate = new Date();
+                localStorage["submitDateTime"] = currentDate.toUTCString();
 				// experimentId & sessionId set in index
 				// isComplete allows the server to record completion, but is optional
 				localStorage["isComplete"] = true;
                 var dataStr = JSON.stringify(localStorage);
                 wso.send(dataStr);
-					//$.ajax({
-					//	url: './data.php',
-					//	type: 'post',
-					//	contentType:'application/json',
-					//	data: JSON.stringify(data),
-					//	dataType:'json'
-					//});
+
 				// Could also wait to see if storage is successful...
 				window.location.href = "./code.html"
 				};
