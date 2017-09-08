@@ -26,7 +26,8 @@
 				localStorage["sessionId"] = sessionId;
 				localStorage["experimentId"] = "ee-blicket-2017-05-17";
 				// CL: Why isn't c put into localStorage here, rather than in the introduction?
-				c = Math.floor(Math.random() * 4);
+				c = Math.floor(Math.random() * 2) + 1;
+				// c = Math.floor(Math.random() * 4);
 				function nextButton() {
 					var radios = document.getElementsByName('consent');
 					for (var i = 0, length = radios.length; i < length; i++) {
