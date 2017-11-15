@@ -18,6 +18,7 @@
 			conditionarr = window.location.href.split("c=");
 			c = conditionarr[1];
 			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
+			//Near condition, red distractor
 			if(c == 0) {
 				var seenConsistentBlocks = ["rrbrr","rbbrb","rrbbb","rbbbr","brrrr","brrrb","bbbrr"];
 				var seenInconsistentBlocks = ["rbrrr","rbrbb","brbbb"];
@@ -30,14 +31,15 @@
 				var seenInconsistentBlocks = ["brbbb","brbrr","rbrrr"];
 				blickets = ["bbrbb","bbrbr","brrbb","brrbr","bbrrb","bbrrr","brrrb","brrrr","rbbrb","rbbrr","rrbrb","rrbrr","rbrrb","rbrrr","rrrrb","rrrrr"]
 				nonBlickets = ["bbbbb","bbbbr","brbbb","brbbr","bbbrb","bbbrr","brbrb","brbrr","rbbbb","rbbbr","rrbbb","rrbbr","rbrbb","rbrbr","rrrbb","rrrbr"]
-				}; 
+				}; 	
 			//Distant condition, red distractor
 			if(c == 2) {
 				var seenConsistentBlocks = ["rrrbr","rrrbb","rrbrb","rbbrb","brrrr","bbrrb","bbbbr"];
 				var seenInconsistentBlocks = ["rbrrr","rrbbb","bbrbr"];
 				blickets = ["rrrbr","rrrbb","rbrbr","rbrbb","rrbrr","rrbrb","rbbrr","rbbrb","brrbr","brrbb","bbrbr","bbrbb","brbrr","brbrb","bbbrr","bbbrb"];
 				nonBlickets = ["rrrrr","rrrrb","rbrrr","rbrrb","rrbbr","rrbbb","rbbbr","rbbbb","brrrr","brrrb","bbrrr","bbrrb","brbbr","brbbb","bbbbr","bbbbb"];
-				};			
+				};	
+	
 			//Distant condition, blue distractor
 			if(c == 3) {
 				var seenConsistentBlocks = ["bbbrb","bbbrr","bbrbr","brrbr","rbbbb","rrbbr","rrrrb"];
@@ -46,14 +48,16 @@
 				nonBlickets = ["bbbbb","bbbbr","brbbb","brbbr","bbrrb","bbrrr","brrrb","brrrr","rbbbb","rbbbr","rrbbb","rrbbr","rbrrb","rbrrr","rrrrb","rrrrr"];
 				};
 				function changeImg() {
-					if (r=1){
+					if (rcon==1){
 						document.getElementById('block1').src = sourceB;
 						document.getElementById('block2').src = sourceNB;
 						blockNames = [currentB,currentNB]
+						rcon = Math.floor(Math.random() * 2 + 1);
 					}else{
 						document.getElementById('block2').src = sourceB;
 						document.getElementById('block1').src = sourceNB;
 						blockNames = [currentNB,currentB]
+						rcon = Math.floor(Math.random() * 2 + 1);
 					}
 				}
 				function nextButton() {
@@ -63,16 +67,20 @@
 						    if (radios[i].checked) {
 						        selection = blockNames[i];
 						        document.getElementById('radio'+i).checked = false;
-						        break;
+						    }
+						    else {
+						        other = blockNames[i];
 						    }
 						}
 						if (blickets.indexOf(selection) !== -1){ 
 							blocktionary[blockNumber] = selection+" (correct)";
-							localStorage["fc_"+blockNumber] = selection+" (correct)";
 						}else{
 							blocktionary[blockNumber] = selection+" (incorrect)";
-							localStorage["fc_"+blockNumber] = selection+" (incorrect)";
 						}
+						localStorage["fc_"+blockNumber+"_selection"] = selection;
+						localStorage["fc_"+blockNumber+"_unselected"] = other;
+						console.log("selection: "+selection);
+						console.log("other: "+other);
 						document.getElementById('button').disabled = true;
 						if (blockNumber > 3){
 							window.location.href = "./explanation.html?c="+c;
@@ -105,7 +113,7 @@
 				nb = nonBlickets.slice(0,4);
 				currentB = b[blockNumber];
 				currentNB = nb[blockNumber];
-				r = Math.floor(Math.random() * 2);
+				rcon = Math.floor(Math.random() * 2 + 1);
 				sourceB = "img/"+currentB+".png";
 				sourceNB = "img/"+currentNB+".png";
 				changeImg()

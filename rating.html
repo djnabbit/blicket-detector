@@ -87,15 +87,18 @@
 						var radios = document.getElementsByName('confidencetask');
 						for (var i = 0, length = radios.length; i < length; i++) {
 							if (radios[i].checked) {
-								selection = selection * parseInt(radios[i].value);
+								certainty = parseInt(radios[i].value);
 								document.getElementById('radio'+radios[i].value).checked = false;
 								break;
 							}
 						}
 						$(document.getElementById("howConfident")).hide();
 						$(document.getElementById("isBlicket")).show();
-						localStorage["rating_"+currentBlock] = selection
-						blocktionary[currentBlock] = selection;
+						localStorage["rating_"+blockNumber+"_ID"] = currentBlock
+						localStorage["rating_"+blockNumber+"_IsBlicket"] = selection
+						localStorage["rating_"+blockNumber+"_Value"] = certainty
+
+						blocktionary[currentBlock] = selection.toString()+"/"+certainty.toString();
 						console.log(blocktionary);
 						if (blockNumber <= 7){
 							currentBlock = sampleBlocks[blockNumber];
@@ -152,7 +155,7 @@
 					Yes
   					<input type="radio" id="isBlicket0" name="blicketnesstask" value="1">
   					No
-  					<input type="radio" id="isBlicket1" name="blicketnesstask" value="-1">
+  					<input type="radio" id="isBlicket1" name="blicketnesstask" value="0">
 					</form>
 		</div>
 	</div>
