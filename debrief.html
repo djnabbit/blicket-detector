@@ -35,7 +35,9 @@
 			$(function(){
 				document.getElementById("button").onclick = nextButton;
 				function nextButton() {
-				localStorage["comments"] = document.getElementById("textbox").value;
+                                localStorage["comments"] = document.getElementById("textbox").value;
+                                var currentDate = new Date();
+                                localStorage["submitDateTime"] = currentDate.toUTCString();
 				// experimentId & sessionId set in index
 				// isComplete allows the server to record completion, but is optional
 				localStorage["isComplete"] = true;
