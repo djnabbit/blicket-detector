@@ -22,30 +22,39 @@
 			if(c == 0) {
 				var seenConsistentBlocks = ["rrbrr","rbbrb","rrbbb","rbbbr","brrrr","brrrb","bbbrr"];
 				var seenInconsistentBlocks = ["rbrrr","rbrbb","brbbb"];
-				blickets = ["rrbrr","rrbrb","rbbrr","rbbrb","rrbbr","rrbbb","rbbbr","rbbbb","brrbr","brrbb","bbrbr","bbrbb","brbbr","brbbb","bbbbr","bbbbb"]
-				nonBlickets = ["rrrrr","rrrrb","rbrrr","rbrrb","rrrbr","rrrbb","rbrbr","rbrbb","brrrr","brrrb","bbrrr","bbrrb","brbrr","brbrb","bbbrr","bbbrb"]
+				blicketsC = ["rrbrb","rbbrr","rrbbr","rbbbb"];
+				blicketsI = ["brrbr","brrbb","bbrbr","bbrbb","brbbr","bbbbr","bbbbb"];
+				nonBlicketsC = ["bbrrr","bbrrb","brbrr","brbrb","bbbrb"];
+				nonBlicketsI = ["rrrrr","rrrrb","rbrrb","rrrbr","rrrbb","rbrbr"];
 				}; 
 			//Near condition, blue distractor	
 			if(c == 1) {
 				var seenConsistentBlocks = ["bbrbb","brrbr","bbrrr","brrrb","rbbbb","rbbbr","rrrbb"];
 				var seenInconsistentBlocks = ["brbbb","brbrr","rbrrr"];
-				blickets = ["bbrbb","bbrbr","brrbb","brrbr","bbrrb","bbrrr","brrrb","brrrr","rbbrb","rbbrr","rrbrb","rrbrr","rbrrb","rbrrr","rrrrb","rrrrr"]
-				nonBlickets = ["bbbbb","bbbbr","brbbb","brbbr","bbbrb","bbbrr","brbrb","brbrr","rbbbb","rbbbr","rrbbb","rrbbr","rbrbb","rbrbr","rrrbb","rrrbr"]
+				blicketsC = ["bbrbr","brrbb","bbrrb","brrrr"];
+				blicketsI = ["rbbrb","rbbrr","rrbrb","rrbrr","rbrrb","rrrrb","rrrrr"];
+				nonBlicketsC = ["rrbbb","rrbbr","rbrbb","rbrbr","rrrbr"];
+				nonBlicketsI = ["bbbbb","bbbbr","brbbr","bbbrb","bbbrr","brbrb"];
 				}; 	
 			//Distant condition, red distractor
 			if(c == 2) {
 				var seenConsistentBlocks = ["rrrbr","rrrbb","rrbrb","rbbrb","brrrr","bbrrb","bbbbr"];
 				var seenInconsistentBlocks = ["rbrrr","rrbbb","bbrbr"];
-				blickets = ["rrrbr","rrrbb","rbrbr","rbrbb","rrbrr","rrbrb","rbbrr","rbbrb","brrbr","brrbb","bbrbr","bbrbb","brbrr","brbrb","bbbrr","bbbrb"];
-				nonBlickets = ["rrrrr","rrrrb","rbrrr","rbrrb","rrbbr","rrbbb","rbbbr","rbbbb","brrrr","brrrb","bbrrr","bbrrb","brbbr","brbbb","bbbbr","bbbbb"];
+				blicketsC = ["rbrbr","rbrbb","rrbrr","rbbrr"];
+				blicketsI = ["brrbr","brrbb","bbrbb","brbrr","brbrb","bbbrr","bbbrb"];
+				nonBlicketsC = ["brrrb","bbrrr","brbbr","brbbb","bbbbb"];
+				nonBlicketsI = ["rrrrr","rrrrb","rbrrb","rrbbr","rbbbr","rbbbb"];
 				};	
 	
 			//Distant condition, blue distractor
 			if(c == 3) {
 				var seenConsistentBlocks = ["bbbrb","bbbrr","bbrbr","brrbr","rbbbb","rrbbr","rrrrb"];
 				var seenInconsistentBlocks = ["brbbb","bbrrr","rrbrb"];
-				blickets = ["bbbrb","bbbrr","brbrb","brbrr","bbrbb","bbrbr","brrbb","brrbr","rbbrb","rbbrr","rrbrb","rrbrr","rbrbb","rbrbr","rrrbb","rrrbr"];
-				nonBlickets = ["bbbbb","bbbbr","brbbb","brbbr","bbrrb","bbrrr","brrrb","brrrr","rbbbb","rbbbr","rrbbb","rrbbr","rbrrb","rbrrr","rrrrb","rrrrr"];
+				blicketsC = ["brbrb","brbrr","bbrbb","brrbb"];
+				blicketsI = ["rbbrb","rbbrr","rrbrb","rrbrr","rbrbb","rbrbr","rrrbb","rrrbr"];
+				nonBlicketsC = ["rbbbr","rrbbb","rbrrb","rbrrr","rrrrr"];
+				nonBlicketsI = ["bbbbb","bbbbr","brbbr","bbrrb","brrrb","brrrr"];
+
 				};
 				function changeImg() {
 					if (rcon==1){
@@ -107,10 +116,22 @@
 	  					}
 					return array;
 				}
-				blickets = shuffle(blickets);
-				nonBlickets = shuffle(nonBlickets);
-				b = blickets.slice(0,4);
-				nb = nonBlickets.slice(0,4);
+				function sort(a,iList) {
+	  				var array = []
+	  				for (var i = 0; i < a.length; i++) {
+    					array[i] = a[iList[i]]
+					}
+					return array;
+				}
+				indexList = shuffle([0,1,2,3])
+				blicketsC = shuffle(blicketsC);
+				blicketsI = shuffle(blicketsI);
+				nonBlicketsC = shuffle(nonBlicketsC);
+				nonBlicketsI = shuffle(nonBlicketsI);
+				blickets = [].concat(blicketsC.slice(0,2),blicketsI.slice(0,2));
+				nonBlickets = [].concat(nonBlicketsC.slice(0,1),nonBlicketsI.slice(0,2),nonBlicketsC.slice(1,2));
+				b = sort(blickets,indexList)
+				nb = sort(nonBlickets,indexList)
 				currentB = b[blockNumber];
 				currentNB = nb[blockNumber];
 				rcon = Math.floor(Math.random() * 2 + 1);
