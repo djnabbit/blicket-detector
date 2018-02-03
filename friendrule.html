@@ -20,7 +20,7 @@
 								break;
 							}
 						}
-					window.location.href = "./attention.html?c="+c
+					window.location.href = "./attention.html?c="+getUrl[1]
 				}
 				var nextEnable = function() {
 					document.getElementById("next").disabled = false;
@@ -28,7 +28,7 @@
 				var sameButton = function() {
 					localStorage["rulepreference"] = "(same)";
 					console.log("stored rulepreference")
-					window.location.href = "./attention.html?c="+c
+					window.location.href = "./attention.html?c="+getUrl[1]
 				}
 				console.log("nextButton defined");
 				document.getElementById("next").onclick = nextButton;
@@ -41,8 +41,8 @@
 				document.getElementById("radio5").onclick = nextEnable;
 				document.getElementById("radio6").onclick = nextEnable;
 				document.getElementById("radio7").onclick = nextEnable;
-				conditionarr = window.location.href.split("c=");
-				conditionarr = conditionarr[1].split("&session");
+				getUrl = window.location.href.split("c=");
+				conditionarr = getUrl[1].split("&session");
 				c = conditionarr[0];
 				document.getElementById("realrule").src = "./img/rule_"+c+".png"
 				if(c==0){
