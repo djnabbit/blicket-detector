@@ -12,8 +12,8 @@
 		$(function(){		
 			window.detected = false;
 		//Parses condition from GET parameter
-			conditionarr = window.location.href.split("c=");
-			conditionarr = conditionarr[1].split("&session");
+			getUrl = window.location.href.split("c=");
+			conditionarr = getUrl[1].split("&session");
 			c = conditionarr[0];
 		//Near condition, red distractor
 			if(c == 0) {
@@ -95,7 +95,7 @@
 				}
 
 			function nextPage() {
-				np = "./ratingintro.html?c="+c
+				np = "./ratingintro.html?c="+getUrl[1]
 				window.location.href = np
 			}
 
