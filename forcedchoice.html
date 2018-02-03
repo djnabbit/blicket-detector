@@ -15,8 +15,8 @@
 			document.getElementById("button").onclick = nextButton;
 			blockNumber = 0
 			blocktionary = {}
-			conditionarr = window.location.href.split("c=");
-			conditionarr = conditionarr[1].split("&session");
+			getUrl = window.location.href.split("c=");
+			conditionarr = getUrl[1].split("&session");
 			c = conditionarr[0];
 			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
 			//Near condition, red distractor
@@ -93,7 +93,7 @@
 						console.log("other: "+other);
 						document.getElementById('button').disabled = true;
 						if (blockNumber > 3){
-							window.location.href = "./explanation.html?c="+c;
+							window.location.href = "./explanation.html?c="+getUrl[1];
 						}
 					currentB = b[blockNumber];
 					currentNB = nb[blockNumber];
