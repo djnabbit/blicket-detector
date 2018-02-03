@@ -41,8 +41,9 @@
 				document.getElementById("radio5").onclick = nextEnable;
 				document.getElementById("radio6").onclick = nextEnable;
 				document.getElementById("radio7").onclick = nextEnable;
-				conditionarr = window.location.href.split("c=")
-				c = conditionarr[1]
+				conditionarr = window.location.href.split("c=");
+				conditionarr = conditionarr[1].split("&session");
+				c = conditionarr[0];
 				document.getElementById("realrule").src = "./img/rule_"+c+".png"
 				if(c==0){
 					document.getElementById("explanation").innerHTML = "Suppose a friend says that the way to determine whether an object is a <b>blicket</b> is by looking at the background and the colours of the corners and centre-left triangle:<br><br>-  If the <b>block background is red</b> and the <b>corners are blue</b>, the block is a blicket.<br><br>-  If the <b>block background is blue</b> and the <b>centre-left triangle is blue</b>, then the block is also a blicket (see image below)."
