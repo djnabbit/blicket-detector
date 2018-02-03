@@ -8,8 +8,9 @@
 		.nexttext { font-weight: bold; color: #002A5C; }
 		</style>
 		<script>
-		conditionarr = window.location.href.split("c=")
-		c = conditionarr[1]
+		conditionarr = window.location.href.split("c=");
+		conditionarr = conditionarr[1].split("&session");
+		c = conditionarr[0];
 		// CL: Added this
 		localStorage["condition"] = c;
 		console.log(localStorage["condition"])
