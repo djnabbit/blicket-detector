@@ -24,7 +24,8 @@
 			blocktionary = {}
 			taskName = "blicketness"
 			$(document.getElementById("howConfident")).hide()
-			conditionarr = window.location.href.split("c=");
+			conditionarr = window.location.href.split(/"c="|"&sessionID"/);
+			console.log(conditionarr)
 			c = conditionarr[1];
 			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
 		//Near condition, red distractor
