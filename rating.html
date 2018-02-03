@@ -24,8 +24,8 @@
 			blocktionary = {}
 			taskName = "blicketness"
 			$(document.getElementById("howConfident")).hide()
-			conditionarr = window.location.href.split("c=");
-			conditionarr = conditionarr[1].split("&session");
+			getUrl = window.location.href.split("c=");
+			conditionarr = getUrl[1].split("&session");
 			c = conditionarr[0];
 			blockList = ["rrrrr","rrrrb","rrrbr","rrrbb","rrbrr","rrbrb","rrbbr","rrbbb","rbrrr","rbrrb","rbrbr","rbrbb","rbbrr","rbbrb","rbbbr","rbbbb","brrrr","brrrb","brrbr","brrbb","brbrr","brbrb","brbbr","brbbb","bbrrr","bbrrb","bbrbr","bbrbb","bbbrr","bbbrb","bbbbr","bbbbb"];
 		//Near condition, red distractor
@@ -124,7 +124,7 @@
 							setTimeout(changeImg(), 100);
 							source = "img/"+currentBlock+".png";
 						}else{
-							window.location.href = "./forcedchoice.html?c="+c;
+							window.location.href = "./forcedchoice.html?c="+getUrl[1];
 						}
 					}
 				}
