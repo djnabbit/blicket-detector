@@ -8,8 +8,8 @@
 		.nexttext { font-weight: bold; color: #002A5C; }
 		</style>
 		<script>
-		conditionarr = window.location.href.split("c=");
-		conditionarr = conditionarr[1].split("&session");
+		getUrl = window.location.href.split("c=");
+		conditionarr = getUrl[1].split("&session");
 		c = conditionarr[0];
 		// CL: Added this
 		localStorage["condition"] = c;
@@ -33,7 +33,7 @@ Please do not use a mobile device for this experiment.</i>
 Click <span class=nexttext>NEXT</span> to continue	
 		</p>
 			<div class="next">
-				<button type="button" id="button" style="margin-top:5px" onclick="location.href='./video.html'+'?c='+c;">NEXT</button>
+				<button type="button" id="button" style="margin-top:5px" onclick="location.href='./video.html'+'?c='+getUrl[1];">NEXT</button>
 			</div>
 		</p>
 	</div>
