@@ -12,8 +12,9 @@
 		$(function(){		
 			window.detected = false;
 		//Parses condition from GET parameter
-			conditionarr = window.location.href.split("c=")
-			c = conditionarr[1]
+			conditionarr = window.location.href.split("c=");
+			conditionarr = conditionarr[1].split("&session");
+			c = conditionarr[0];
 		//Near condition, red distractor
 			if(c == 0) {
 				var consistentBlocks = ["rrbrr","rbbrb","rrbbb","rbbbr","brrrr","brrrb","bbbrr"];
